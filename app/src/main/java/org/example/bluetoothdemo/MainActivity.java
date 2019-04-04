@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BluetoothAdapter mBluetoothAdapter;
     private TextView text1, text2, text3;
-    private Button button;
+    private Button button, buttonGo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         text2 = (TextView) findViewById(R.id.textView2);
         text3 = (TextView) findViewById(R.id.textView3);
         button = (Button) findViewById(R.id.button);
+        buttonGo = (Button) findViewById(R.id.button_go);
+
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
@@ -46,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
                 text1.setText("Searching...");
                 text2.setText("Paired Devices:");
                 text3.setText("Devices Not Paired:");
+            }
+        });
+
+        buttonGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, CommunicationActivity.class);
+                startActivity(i);
             }
         });
     }
