@@ -11,7 +11,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:text="搜索蓝牙"
+        android:text="Search BT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
@@ -20,7 +20,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="初始状态"
+        android:text="Initial State"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/button"
@@ -29,13 +29,13 @@
         android:layout_marginLeft="45dp"
         android:layout_marginStart="45dp"
         android:layout_marginBottom="14dp"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:text="已配对蓝牙设备如下："
+        android:id="@+id/textView2"
+        android:text="Paired Devices："
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="53dp"
@@ -44,13 +44,13 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="未配对蓝牙设备如下："
+        android:text="Devices Not Paired："
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="107dp"
         android:id="@+id/textView3"
-        android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
 
 </RelativeLayout>

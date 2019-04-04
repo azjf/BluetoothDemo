@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private BluetoothAdapter mBluetoothAdapter;
-    private TextView text, text2, text3;
+    private TextView text1, text2, text3;
     private Button button;
 
     @Override
@@ -24,15 +24,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        text = (TextView) findViewById(R.id.textView);
+        text1 = (TextView) findViewById(R.id.textView1);
         text2 = (TextView) findViewById(R.id.textView2);
         text3 = (TextView) findViewById(R.id.textView3);
         button = (Button) findViewById(R.id.button);
 
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        registerReceiver(mReceiver, filter);
+        IntentFilter filter1 = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        registerReceiver(mReceiver, filter1);
         IntentFilter filter2 = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         registerReceiver(mReceiver, filter2);
 
@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
                     mBluetoothAdapter.enable();
                 }
                 mBluetoothAdapter.startDiscovery();
-                text2.setText("Searching...");
+                text1.setText("Searching...");
+                text2.setText("Paired Devices:");
+                text3.setText("Devices Not Paired:");
             }
         });
     }
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
 
         unregisterReceiver(mReceiver);
-        Log.e("destroy", "unregister");
+        Log.d("bluetoothdemo", "onDestroy: unregister");
     }
 
 
@@ -63,18 +65,20 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            Log.e("ywq", action);
+            Log.d("bluetoothdemo", action);
 
             if (action.equals(BluetoothDevice.ACTION_FOUND)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                String device_str = device.getName() + "==>" + device.getAddress();
+                Log.d("bluetoothdemo", device_str + "\n");
 
                 if (device.getBondState() == BluetoothDevice.BOND_BONDED) {
-                    text.append("\n" + device.getName() + "==>" + device.getAddress() + "\n");
+                    text2.append("\n" + device_str);
                 } else {
-                    text3.append("\n" + device.getName() + "==>" + device.getAddress() + "\n");
+                    text3.append("\n" + device_str);
                 }
             } else if (action.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) {
-                text2.setText("Search finished.");
+                text1.setText("Search finished.");
             }
         }
     };
